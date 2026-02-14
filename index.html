@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<!-- MS, fb & Whatsapp -->
+
+<!-- MS Tile - for Microsoft apps-->
+<meta name="msapplication-TileImage" content="http://www.example.com/image01.jpg">    
+
+<!-- fb & Whatsapp -->
+
+<!-- Site Name, Title, and Description to be displayed -->
+<meta property="og:site_name" content="The Rock Photo Studio">
+<meta property="og:title" content="The Rock Photo Studio in Florida">
+<meta property="og:description" content="The best photo studio for your events">
+
+<!-- Image to display -->
+<!-- Replace   «example.com/image01.jpg» with your own -->
+<meta property="og:image" content="foto.jpg">
+
+<!-- No need to change anything here -->
+<meta property="og:type" content="website" />
+<meta property="og:image:type" content="image/jpeg">
+
+<!-- Size of image. Any size up to 300. Anything above 300px will not work in WhatsApp -->
+<meta property="og:image:width" content="300">
+<meta property="og:image:height" content="300">
+
+<!-- Website to visit when clicked in fb or WhatsApp-->
+<meta property="og:url" content="http://www.example.com">
+
+<meta charset="UTF-8">
+<title>Para Nerea ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    margin:0;
+    padding:0;
+    height:100vh;
+    width:100vw;
+    background: radial-gradient(circle at center, #1a0a00, #000);
+    font-family: 'Georgia', serif;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    color:#f5d27a;
+}
+
+/* PANTALLA INICIAL */
+#inicio {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+#botonRegalo {
+    font-size: 40px;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 15px;
+    background: #c59d5f;
+    color: #3b220d;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 0 15px #f5d27a;
+    transition: transform 0.2s ease;
+}
+
+#botonRegalo:hover {
+    transform: scale(1.1);
+}
+
+/* PANTALLA DE REGALO */
+#contenido {
+    display: none; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    background: linear-gradient(to bottom, #1a0a00, #2b0000);
+    opacity:0;
+    transition: opacity 6s ease;
+    z-index:2; /* contenido encima de las velas */
+}
+
+/* LUZ DORADA */
+#luz {
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.6), transparent 70%);
+    opacity:0;
+    top:20%;
+    left:50%;
+    transform:translateX(-50%);
+    transition: opacity 6s ease;
+    z-index:3;
+}
+
+/* FOTO */
+.photo img {
+    width:25%;
+    max-width:100px;
+    border-radius:20px;
+    margin:20px 0;
+    box-shadow: 0 0 20px rgba(255,215,0,0.3);
+}
+
+/* VELAS DETRÁS DEL CONTENIDO */
+.candles {
+    width:100%;
+    display:flex;
+    justify-content:space-around;
+    position:absolute;
+    z-index:1; /* menor que el contenido */
+}
+
+.candles.top { 
+    top:0; 
+    transform: rotate(180deg);
+}
+.candles.top .flame { transform: rotate(180deg); }
+.candles.bottom { bottom:0; }
+
+.candle {
+    width:6px;
+    height:25px;
+    background:#fff;
+    position:relative;
+    border-radius:5px;
+}
+
+.flame {
+    width:6px;
+    height:15px;
+    background:orange;
+    position:absolute;
+    top:-25px;
+    left:1px;
+    border-radius:50%;
+    animation:flicker 0.2s infinite alternate;
+}
+
+@keyframes flicker {
+    from {transform: scale(1);}
+    to {transform: scale(1.15);}
+}
+
+/* BOTÓN FINAL */
+#botonInvitacion {
+    font-size:18px;
+    padding:5px 10px;
+    border:none;
+    border-radius:12px;
+    background:#c59d5f;
+    color:#3b220d;
+    cursor:pointer;
+    margin-top:10px;
+    opacity:0;
+    transition: opacity 3s ease, transform 0.3s ease;
+    animation: heartbeat 1.5s infinite;
+    z-index:4;
+    box-shadow: 0 0 15px #f5d27a;
+}
+
+#botonInvitacion:hover {
+    transform: scale(1.1);
+}
+
+@keyframes heartbeat {
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.05);}
+}
+
+/* MODAL */
+#modal {
+    display:none;
+    position:fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: rgba(27,15,5,0.85);
+    justify-content:center;
+    align-items:center;
+    z-index:10;
+}
+
+#modal div {
+    background: #3b220d;
+    padding:40px;
+    border-radius:20px;
+    color:#f5d27a;
+    font-size:28px;
+    text-align:center;
+    box-shadow:0 0 20px #f5d27a;
+    border: 3px solid #c59d5f;
+    animation: modalAppear 0.5s ease;
+}
+
+@keyframes modalAppear {
+    from { transform: scale(0.5); opacity:0; }
+    to { transform: scale(1); opacity:1; }
+}
+
+/* CANVAS FUEGOS ARTIFICIALES */
+#fireworksCanvas {
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:9;
+}
+</style>
+</head>
+<body>
+
+<!-- PANTALLA INICIAL -->
+<div id="inicio">
+    <h1>Nerea ❤️</h1>
+    <p>Tengo algo muy especial para ti…</p>
+    <button id="botonRegalo">🎁 Abrir regalo</button>
+</div>
+
+<!-- LUZ DORADA -->
+<div id="luz"></div>
+
+<!-- PANTALLA DE REGALO -->
+<div id="contenido">
+    <div>
+        <h1>Nuestra noche mágica ✨</h1>
+        <p>🕯 Concierto Candlelight – Bandas Sonoras Mágicas<br>📅 Viernes 13 de marzo<br>📍 Madrid<br>🍷 Cena especial para dos</p>
+        <div class="photo">
+            <img src="foto.jpg" alt="Nuestra foto">
+        </div>
+        <p>Una noche iluminada por velas,<br>escuchando las bandas sonoras más mágicas…<br>Porque lo mejor del regalo es compartirlo contigo ❤️</p>
+    </div>
+
+    <!-- BOTÓN FINAL -->
+    <button id="botonInvitacion">¿Te vienes conmigo? 💖</button>
+
+    <!-- VELAS ARRIBA -->
+    <div class="candles top">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+    </div>
+
+    <!-- VELAS ABAJO -->
+    <div class="candles bottom">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+    </div>
+</div>
+
+<!-- MUSICA -->
+<audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MODAL -->
+<div id="modal">
+    <div>¡Nerea, nos vamos al concierto! 🎶✨</div>
+</div>
+
+<!-- CANVAS FUEGOS ARTIFICIALES -->
+<canvas id="fireworksCanvas"></canvas>
+
+<script>
+// ---- PANTALLA INICIAL -> REGALO ----
+document.getElementById("botonRegalo").addEventListener("click", function(){
+    document.getElementById("inicio").style.display = "none";
+    const contenido = document.getElementById("contenido");
+    contenido.style.display = "flex";
+
+    setTimeout(()=>{
+        document.getElementById("musica").play();
+        contenido.style.opacity = "1";
+        document.getElementById("luz").style.opacity = "1";
+        document.getElementById("botonInvitacion").style.opacity = "1";
+    },2000);
+});
+
+// ---- BOTÓN FINAL ----
+document.getElementById("botonInvitacion").addEventListener("click", function(){
+    document.getElementById("modal").style.display = "flex";
+
+    const luz = document.getElementById("luz");
+    luz.style.transition = "opacity 0.2s ease";
+    luz.style.opacity = "0.9";
+    setTimeout(()=>{ luz.style.opacity="1"; },200);
+
+    document.querySelectorAll(".candle").forEach(c => {
+        c.style.transform = "translateY(-5px)";
+        setTimeout(()=>{ c.style.transform="translateY(0)"; },200);
+    });
+
+    startFireworks();
+});
+
+// ---- FUEGOS ARTIFICIALES REALISTAS ----
+const canvas = document.getElementById("fireworksCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let fireworks = [];
+let particles = [];
+
+function random(min,max){ return Math.random()*(max-min)+min; }
+
+class Firework {
+    constructor(){
+        this.x = random(100, canvas.width-100);
+        this.y = canvas.height;
+        this.targetY = random(100, canvas.height/2);
+        this.vy = random(4,7);
+        this.color = `hsl(${Math.floor(random(0,360))},100%,50%)`;
+        this.exploded = false;
+    }
+    update(){
+        if(!this.exploded){
+            this.y -= this.vy;
+            if(this.y <= this.targetY){
+                this.explode();
+            }
+        }
+    }
+    explode(){
+        this.exploded = true;
+        for(let i=0;i<50;i++){
+            particles.push(new Particle(this.x,this.y,this.color));
+        }
+    }
+    draw(){
+        if(!this.exploded){
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.arc(this.x,this.y,3,0,2*Math.PI);
+            ctx.fill();
+        }
+    }
+}
+
+class Particle {
+    constructor(x,y,color){
+        this.x = x; this.y = y;
+        const angle = random(0, 2*Math.PI);
+        const speed = random(2,6);
+        this.vx = Math.cos(angle)*speed;
+        this.vy = Math.sin(angle)*speed;
+        this.alpha = 1;
+        this.color = color;
+        this.gravity = 0.05;
+    }
+    update(){
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += this.gravity;
+        this.alpha -= 0.008;
+    }
+    draw(){
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,3,0,2*Math.PI);
+        ctx.fill();
+        ctx.globalAlpha =1;
+    }
+}
+
+function startFireworks(){
+    let fwInterval = setInterval(()=>{
+        fireworks.push(new Firework());
+    },200);
+
+    let duration = 25000; // 25 segundos de magia
+    const startTime = Date.now();
+
+    function animate(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        fireworks.forEach((fw,index)=>{
+            fw.update();
+            fw.draw();
+            if(fw.exploded) fireworks.splice(index,1);
+        });
+
+        particles.forEach((p,index)=>{
+            p.update();
+            p.draw();
+            if(p.alpha <=0) particles.splice(index,1);
+        });
+
+        if(Date.now() - startTime < duration){
+            requestAnimationFrame(animate);
+        }
+    }
+    animate();
+}
+
+window.addEventListener("resize",()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
+</script>
+</body>
+</html>
